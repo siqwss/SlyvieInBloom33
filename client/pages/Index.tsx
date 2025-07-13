@@ -220,11 +220,10 @@ export default function Index() {
                 <Heart className="h-8 w-8 text-brand-cream" />
               </div>
               <h3 className="text-xl font-semibold text-brand-primary mb-2">
-                Handmade with Love
+                {t("features.handmade.title")}
               </h3>
               <p className="text-brand-primary/70">
-                Every piece is carefully crafted by hand with attention to
-                detail and premium materials.
+                {t("features.handmade.desc")}
               </p>
             </div>
             <div className="text-center">
@@ -232,11 +231,10 @@ export default function Index() {
                 <ShoppingBag className="h-8 w-8 text-brand-cream" />
               </div>
               <h3 className="text-xl font-semibold text-brand-primary mb-2">
-                Fast Delivery
+                {t("features.delivery.title")}
               </h3>
               <p className="text-brand-primary/70">
-                Quick and secure delivery across Saudi Arabia with tracking
-                included.
+                {t("features.delivery.desc")}
               </p>
             </div>
             <div className="text-center">
@@ -244,10 +242,10 @@ export default function Index() {
                 <Star className="h-8 w-8 text-brand-cream" />
               </div>
               <h3 className="text-xl font-semibold text-brand-primary mb-2">
-                Premium Quality
+                {t("features.quality.title")}
               </h3>
               <p className="text-brand-primary/70">
-                Using only the finest materials to ensure durability and beauty.
+                {t("features.quality.desc")}
               </p>
             </div>
           </div>
