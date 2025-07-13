@@ -8,6 +8,7 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function Footer() {
   return (
