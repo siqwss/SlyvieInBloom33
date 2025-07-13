@@ -11,27 +11,27 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 
 export function Footer() {
+  const { t, isRTL } = useLanguage();
+
   return (
     <footer className="bg-brand-primary text-brand-cream">
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-brand-cream rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-brand-primary rounded-full relative">
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-brand-cream rounded-full"></div>
-                  <div className="absolute -top-1 -left-1 w-3 h-3 bg-brand-cream rounded-full"></div>
-                </div>
-              </div>
+            <div
+              className={`flex items-center ${isRTL ? "space-x-reverse space-x-2" : "space-x-2"}`}
+            >
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+                alt="Slyvie in bloom logo"
+                className="w-8 h-8 object-contain brightness-0 invert"
+              />
               <span className="text-xl font-serif font-semibold">
-                Slyvie in bloom
+                {t("header.brand")}
               </span>
             </div>
-            <p className="text-brand-cream/80">
-              Handcrafted crochet pieces made with love and care. Each item is
-              unique and created to bring warmth to your home.
-            </p>
+            <p className="text-brand-cream/80">{t("footer.description")}</p>
             <div className="flex space-x-4">
               <a
                 href="#"
