@@ -534,12 +534,12 @@
         <!-- Register Form -->
         <form id="registerForm" class="auth-form hidden">
           <div class="form-group">
-            <label class="form-label" for="registerName">الاسم الكامل</label>
+            <label class="form-label" for="registerName">��لاسم الكامل</label>
             <input
               type="text"
               id="registerName"
               class="form-input"
-              placeholder="أدخل اسمك الكامل"
+              placeholder="أدخل اسمك الكام��"
               required
             />
           </div>
@@ -612,7 +612,7 @@
             <h2 class="welcome-title">
               مرحباً <span id="customerName"></span> 🌸
             </h2>
-            <p>نحن سعداء بوجودك معنا في متجر سليفي إن بلوم</p>
+            <p>نحن سعداء بوجودك م��نا في متجر سليفي إن بلوم</p>
           </div>
 
           <div class="stats-grid">
@@ -712,13 +712,18 @@
         });
         event.target.classList.add("active");
 
-        // Show/hide forms
+        // Hide all forms
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("registerForm").classList.add("hidden");
+        document.getElementById("adminForm").classList.add("hidden");
+
+        // Show selected form
         if (tab === "login") {
           document.getElementById("loginForm").classList.remove("hidden");
-          document.getElementById("registerForm").classList.add("hidden");
-        } else {
-          document.getElementById("loginForm").classList.add("hidden");
+        } else if (tab === "register") {
           document.getElementById("registerForm").classList.remove("hidden");
+        } else if (tab === "admin") {
+          document.getElementById("adminForm").classList.remove("hidden");
         }
       }
 
@@ -883,7 +888,7 @@
             <div style="text-align: center; padding: 40px; color: rgba(139, 38, 35, 0.6);">
               <h3 style="margin-bottom: 16px;">لا توجد طلبات بعد</h3>
               <p>ابدئي تسوقك الآن واستمتعي بمنتجاتنا الجميلة!</p>
-              <a href="index.html" class="btn btn-primary" style="margin-top: 16px;">🛍️ ابدئي التسوق</a>
+              <a href="index.html" class="btn btn-primary" style="margin-top: 16px;">🛍️ ا��دئي التسوق</a>
             </div>
           `;
           return;
@@ -917,7 +922,7 @@
           pending: "قيد المراجعة",
           confirmed: "مؤكد",
           preparing: "قيد التحضير",
-          shipped: "في الطريق إ��يك",
+          shipped: "في الطريق إليك",
           completed: "مكتمل",
         };
         return statusMap[status] || status;
