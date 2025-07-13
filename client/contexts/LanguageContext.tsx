@@ -52,7 +52,7 @@ const translations = {
     "cart.emptyDesc": "Start shopping to add items to your cart",
     "cart.continue": "Continue Shopping",
     "cart.viewCart": "View Cart",
-    "cart.items": "items in cart",
+    "cart.itemsInCart": "items in cart",
     "cart.orderSummary": "Order Summary",
     "cart.items": "Items",
     "cart.shipping": "Shipping",
@@ -137,7 +137,7 @@ const translations = {
     "cart.orderSummary": "ملخص الطلب",
     "cart.items": "المنتجات",
     "cart.shipping": "الشحن",
-    "cart.free": "مجان��",
+    "cart.free": "مجاني",
     "cart.total": "المجموع",
     "cart.checkout": "إتمام الطلب",
 
