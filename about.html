@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قصتنا - Slyvie in bloom</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #8b2623;
+        --brand-cream: #fdfcf3;
+        --brand-dark: #6b1e1b;
+        --brand-light: #a5312e;
+        --brand-accent: rgba(139, 38, 35, 0.1);
+        --gradient-warm: linear-gradient(135deg, #fdf2f8, #fce7f3, #f3e8ff);
+        --gradient-accent: linear-gradient(135deg, var(--brand-cream), #fff7ed);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans Arabic", "Inter", sans-serif;
+        background-color: var(--brand-cream);
+        color: var(--brand-primary);
+        line-height: 1.7;
+        direction: rtl;
+      }
+
+      .font-serif {
+        font-family: "Playfair Display", serif;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      /* Header Styles */
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(253, 252, 243, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--brand-accent);
+        z-index: 50;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--brand-primary);
+      }
+
+      .logo img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+
+      .logo-text {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      .nav {
+        display: flex;
+        gap: 32px;
+      }
+
+      .nav a {
+        color: var(--brand-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav a:hover {
+        color: var(--brand-dark);
+      }
+
+      .nav a.active {
+        color: var(--brand-dark);
+        font-weight: 600;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: var(--gradient-accent);
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://images.unsplash.com/photo-1516832970803-1dc8c59a7e39?w=1200&h=600&fit=crop&opacity=0.05")
+          center/cover;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 24px;
+        color: var(--brand-primary);
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 20px;
+        margin-bottom: 32px;
+        color: rgba(139, 38, 35, 0.8);
+      }
+
+      .decorative-element {
+        display: inline-block;
+        font-size: 2rem;
+        margin: 0 16px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Story Section */
+      .story-section {
+        padding: 80px 0;
+      }
+
+      .story-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .story-card {
+        background: white;
+        border-radius: 24px;
+        padding: 48px;
+        box-shadow: 0 10px 40px rgba(139, 38, 35, 0.1);
+        border: 1px solid var(--brand-accent);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .story-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--brand-primary),
+          var(--brand-light),
+          var(--brand-primary)
+        );
+      }
+
+      .story-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .story-title {
+        font-size: 2.5rem;
+        font-family: "Playfair Display", serif;
+        color: var(--brand-primary);
+        margin-bottom: 16px;
+      }
+
+      .story-subtitle {
+        font-size: 18px;
+        color: rgba(139, 38, 35, 0.7);
+        font-style: italic;
+      }
+
+      .story-content {
+        display: grid;
+        gap: 48px;
+      }
+
+      .language-section {
+        padding: 32px;
+        border-radius: 16px;
+        background: var(--gradient-warm);
+        border: 1px solid rgba(139, 38, 35, 0.1);
+      }
+
+      .language-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .language-flag {
+        width: 32px;
+        height: 24px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .arabic-flag {
+        background: linear-gradient(to bottom, #006c35, #ffffff, #000000);
+      }
+
+      .english-flag {
+        background:
+          linear-gradient(
+            45deg,
+            #012169 25%,
+            transparent 25%,
+            transparent 75%,
+            #012169 75%
+          ),
+          linear-gradient(
+            -45deg,
+            #012169 25%,
+            transparent 25%,
+            transparent 75%,
+            #012169 75%
+          ),
+          linear-gradient(to bottom, #c8102e, #ffffff, #c8102e);
+      }
+
+      .language-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--brand-dark);
+      }
+
+      .story-text {
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--brand-primary);
+      }
+
+      .story-text p {
+        margin-bottom: 20px;
+      }
+
+      .story-text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .highlight {
+        background: linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(139, 38, 35, 0.1) 50%,
+          transparent 100%
+        );
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .signature {
+        text-align: center;
+        margin-top: 32px;
+        padding: 24px;
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Values Section */
+      .values-section {
+        padding: 80px 0;
+        background: var(--brand-accent);
+      }
+
+      .values-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .values-header h2 {
+        font-size: 2.5rem;
+        font-family: "Playfair Display", serif;
+        color: var(--brand-primary);
+        margin-bottom: 16px;
+      }
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 32px;
+      }
+
+      .value-card {
+        background: white;
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(139, 38, 35, 0.1);
+        text-align: center;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .value-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(139, 38, 35, 0.15);
+      }
+
+      .value-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--brand-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 24px;
+      }
+
+      .value-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        margin-bottom: 12px;
+      }
+
+      .value-description {
+        color: rgba(139, 38, 35, 0.8);
+        line-height: 1.6;
+      }
+
+      /* Gallery Section */
+      .gallery-section {
+        padding: 80px 0;
+      }
+
+      .gallery-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .gallery-header h2 {
+        font-size: 2.5rem;
+        font-family: "Playfair Display", serif;
+        color: var(--brand-primary);
+        margin-bottom: 16px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+      }
+
+      .gallery-item {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(139, 38, 35, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.02);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        padding: 64px 0 24px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .footer-brand img {
+        width: 32px;
+        height: 32px;
+        filter: brightness(0) invert(1);
+      }
+
+      .footer-brand-text {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      .footer-description {
+        opacity: 0.8;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 8px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 24px;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .story-card {
+          padding: 32px 24px;
+          margin: 16px;
+        }
+
+        .story-title {
+          font-size: 2rem;
+        }
+
+        .language-section {
+          padding: 24px;
+        }
+
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .stagger-1 {
+        animation-delay: 0.1s;
+      }
+      .stagger-2 {
+        animation-delay: 0.2s;
+      }
+      .stagger-3 {
+        animation-delay: 0.3s;
+      }
+
+      /* Language switcher for this page */
+      .page-language-toggle {
+        position: fixed;
+        top: 100px;
+        left: 20px;
+        background: white;
+        border-radius: 50px;
+        padding: 8px;
+        box-shadow: 0 4px 16px rgba(139, 38, 35, 0.2);
+        z-index: 100;
+      }
+
+      .lang-btn {
+        padding: 8px 16px;
+        border: none;
+        background: transparent;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+
+      .lang-btn.active {
+        background: var(--brand-primary);
+        color: white;
+      }
+
+      .lang-btn:hover:not(.active) {
+        background: var(--brand-accent);
+      }
+
+      /* Hide/show language sections */
+      .language-section.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Language Toggle -->
+    <div class="page-language-toggle">
+      <button class="lang-btn active" onclick="showLanguage('ar')">
+        العربية
+      </button>
+      <button class="lang-btn" onclick="showLanguage('en')">English</button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <!-- Logo -->
+          <a href="index.html" class="logo">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+              alt="Slyvie in bloom logo"
+            />
+            <span class="logo-text">Slyvie in bloom</span>
+          </a>
+
+          <!-- Navigation -->
+          <nav class="nav">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#shop">المتجر</a>
+            <a href="about.html" class="active">قصتنا</a>
+            <a href="policies.html">سياسات المتجر</a>
+            <a href="#contact">تواصل معنا</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="font-serif animate-fade-in">
+            <span class="decorative-element">🧶</span>
+            قصة شغف وإبداع
+            <span class="decorative-element">🌸</span>
+          </h1>
+          <p class="animate-fade-in stagger-1">
+            رحلة فتاة سعودية من الهواية إلى المشروع، حيث تتحول خيوط الكروشيه إلى
+            قطع فنية مميزة
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+      <div class="container">
+        <div class="story-container">
+          <div class="story-card animate-fade-in stagger-2">
+            <div class="story-header">
+              <h2 class="story-title font-serif">مرحباً بكم في عالمي</h2>
+              <p class="story-subtitle">حيث كل خيط يحكي قصة حب وإبداع</p>
+            </div>
+
+            <div class="story-content">
+              <!-- Arabic Story -->
+              <div class="language-section" id="arabic-story">
+                <div class="language-header">
+                  <div class="language-flag arabic-flag">🇸🇦</div>
+                  <h3 class="language-title">قصتي بالعربية</h3>
+                </div>
+                <div class="story-text">
+                  <p>
+                    أهلاً وسهلاً! أنا فتاة سعودية عمري
+                    <span class="highlight">14 سنة</span>، بدأت مشروعي الصغير
+                    بالكروشيه بشغف كبير.
+                  </p>
+                  <p>
+                    أحب أستخدم الخيوط والألوان عشان أخلق قطع فريدة ومميزة
+                    <span class="highlight">بكل حب واهتمام</span>. كل لون
+                    يختارني وكل خيط يرقص بين أصابعي ليصبح شيئاً جميلاً يدفئ
+                    القلب.
+                  </p>
+                  <p>
+                    بدأت الحياكة كهواية بسيطة، أتعلم من اليوتيوب وأجرب تقنيات
+                    جديدة. ومع الوقت صارت
+                    <span class="highlight">شغفي ومصدر سعادتي</span>. كل قطعة
+                    أنجزها تعطيني شعور بالفخر والإنجاز.
+                  </p>
+                  <p>
+                    قررت أفتح هذا المتجر عشان أشارك شغفي معكم وأقدم لكم منتجات
+                    يدوية تنصنع بكل حب. أتمنى أن تشعروا بالدفء والحب اللي أضعه
+                    في كل قطعة.
+                  </p>
+                  <p>
+                    كل قطعة تشوفونها هنا
+                    <span class="highlight">مصنوعة يدويًا 100%</span>، ومصممة
+                    خصيصًا لكم بعناية فائقة وحب كبير.
+                  </p>
+                </div>
+              </div>
+
+              <!-- English Story -->
+              <div class="language-section hidden" id="english-story">
+                <div class="language-header">
+                  <div class="language-flag english-flag">🇬🇧</div>
+                  <h3 class="language-title">My Story in English</h3>
+                </div>
+                <div class="story-text">
+                  <p>
+                    Hi and welcome! I'm a
+                    <span class="highlight"
+                      >14-year-old girl from Saudi Arabia</span
+                    >, and I started this small crochet business out of pure
+                    passion.
+                  </p>
+                  <p>
+                    I love creating unique handmade crochet pieces
+                    <span class="highlight">with care and love</span>. Every
+                    color speaks to me, and every thread dances through my
+                    fingers to become something beautiful that warms the heart.
+                  </p>
+                  <p>
+                    What started as a simple hobby, learning from YouTube and
+                    trying new techniques, gradually
+                    <span class="highlight">became my joy and inspiration</span
+                    >. Each piece I complete gives me a sense of pride and
+                    accomplishment.
+                  </p>
+                  <p>
+                    I decided to open this store to share my passion with you
+                    and offer handmade products crafted with love. I hope you
+                    can feel the warmth and care I put into every piece.
+                  </p>
+                  <p>
+                    Each piece here is
+                    <span class="highlight">100% handmade</span> and crafted
+                    with you in mind, with meticulous attention to detail and
+                    lots of love.
+                  </p>
+                </div>
+              </div>
+
+              <div class="signature">
+                <div style="margin-bottom: 8px">
+                  شكرًا لثقتكم ودعمكم الدائم!
+                </div>
+                <div style="margin-bottom: 8px">
+                  Thank you so much for your trust and support!
+                </div>
+                <div style="font-size: 24px; margin-top: 16px">
+                  — سليفـي إن بلوم 🧶🌸
+                </div>
+                <div style="font-size: 20px">— Slyvie in Bloom 🧶🌸</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <div class="container">
+        <div class="values-header">
+          <h2 class="font-serif">قيمنا ومبادئنا</h2>
+          <p>ما يجعل كل قطعة من قطعنا مميزة وفريدة</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card animate-fade-in">
+            <div class="value-icon">💝</div>
+            <h3 class="value-title">صنع بحب</h3>
+            <p class="value-description">
+              كل قطعة مصنوعة بحب وشغف حقيقي، مع الاهتمام بأدق التفاصيل لتصل
+              إليكم بأفضل جودة ممكنة.
+            </p>
+          </div>
+          <div class="value-card animate-fade-in stagger-1">
+            <div class="value-icon">🌟</div>
+            <h3 class="value-title">جودة عالية</h3>
+            <p class="value-description">
+              نستخدم أجود أنواع الخيوط والمواد لضمان متانة وجمال كل قطعة تحصلون
+              عليها.
+            </p>
+          </div>
+          <div class="value-card animate-fade-in stagger-2">
+            <div class="value-icon">✨</div>
+            <h3 class="value-title">تصاميم فريدة</h3>
+            <p class="value-description">
+              كل تصميم مبتكر وفريد، مستوحى من الطبيعة والجمال المحيط بنا في كل
+              مكان.
+            </p>
+          </div>
+          <div class="value-card animate-fade-in stagger-3">
+            <div class="value-icon">🤝</div>
+            <h3 class="value-title">خدمة شخصية</h3>
+            <p class="value-description">
+              نهتم بكل عميل كأنه من العائلة، ونسعى لتقديم أفضل تجربة شراء ممكنة.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="gallery-header">
+          <h2 class="font-serif">من أعمالي</h2>
+          <p>مجموعة من القطع التي صنعتها بحب وإتقان</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=300&fit=crop"
+              alt="بطانية كروشيه للأطفال"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop"
+              alt="باقة ورود كروشيه"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=300&h=300&fit=crop"
+              alt="وشاح شتوي"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop"
+              alt="دب أميجورومي"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop"
+              alt="قطع كروشيه متنوعة"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1516832970803-1dc8c59a7e39?w=300&h=300&fit=crop"
+              alt="خيوط ملونة"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <!-- Brand -->
+          <div>
+            <div class="footer-brand">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+                alt="Logo"
+              />
+              <span class="footer-brand-text">Slyvie in bloom</span>
+            </div>
+            <p class="footer-description">
+              قطع كروشيه مصنوعة يدوياً بحب واهتمام من فتاة سعودية شغوفة. كل قطعة
+              فريدة ومصممة لتضفي الدفء والجمال على حياتكم.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h3>روابط سريعة</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">الرئيسية</a></li>
+              <li><a href="index.html#shop">المتجر</a></li>
+              <li><a href="about.html">قصتنا</a></li>
+              <li><a href="policies.html">سياسات المتجر</a></li>
+            </ul>
+          </div>
+
+          <!-- Categories -->
+          <div class="footer-section">
+            <h3>الفئات</h3>
+            <ul class="footer-links">
+              <li><a href="#">منتجات الأطفال</a></li>
+              <li><a href="#">ديكور المنزل</a></li>
+              <li><a href="#">اكسسوارات</a></li>
+              <li><a href="#">ألعاب</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-section">
+            <h3>تواصل معي</h3>
+            <ul class="footer-links">
+              <li>hello@slyviebloom.com</li>
+              <li>+966 50 123 4567</li>
+              <li>الرياض، المملكة العربية السعودية</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; ٢٠٢٤ سليفـي إن بلوم. جميع الحقوق محفوظة بحب 🧶💕</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function showLanguage(lang) {
+        // Hide all language sections
+        document.querySelectorAll(".language-section").forEach((section) => {
+          section.classList.add("hidden");
+        });
+
+        // Show selected language
+        if (lang === "ar") {
+          document.getElementById("arabic-story").classList.remove("hidden");
+        } else {
+          document.getElementById("english-story").classList.remove("hidden");
+        }
+
+        // Update active button
+        document.querySelectorAll(".lang-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+      }
+
+      // Animate elements on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document
+        .querySelectorAll(".story-card, .value-card, .gallery-item")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Add WhatsApp contact button
+      const whatsappBtn = document.createElement("div");
+      whatsappBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        z-index: 1000;
+        transition: transform 0.3s;
+      `;
+      whatsappBtn.innerHTML = `
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.108"/>
+        </svg>
+      `;
+
+      whatsappBtn.addEventListener("click", () => {
+        const phoneNumber = "966501234567";
+        const message = encodeURIComponent(
+          "مرحباً! أعجبتني قصتك وأعمالك الجميلة، أريد أن أستفسر عن منتجاتكم 🧶🌸",
+        );
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+      });
+
+      whatsappBtn.addEventListener("mouseenter", () => {
+        whatsappBtn.style.transform = "scale(1.1)";
+      });
+
+      whatsappBtn.addEventListener("mouseleave", () => {
+        whatsappBtn.style.transform = "scale(1)";
+      });
+
+      document.body.appendChild(whatsappBtn);
+    </script>
+  </body>
+</html>
