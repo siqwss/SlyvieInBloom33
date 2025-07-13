@@ -534,12 +534,12 @@
         <!-- Register Form -->
         <form id="registerForm" class="auth-form hidden">
           <div class="form-group">
-            <label class="form-label" for="registerName">��لاسم الكامل</label>
+            <label class="form-label" for="registerName">الاسم الكامل</label>
             <input
               type="text"
               id="registerName"
               class="form-input"
-              placeholder="أدخل اسمك الكام��"
+              placeholder="أدخل اسمك الكامل"
               required
             />
           </div>
@@ -612,7 +612,7 @@
             <h2 class="welcome-title">
               مرحباً <span id="customerName"></span> 🌸
             </h2>
-            <p>نحن سعداء بوجودك م��نا في متجر سليفي إن بلوم</p>
+            <p>نحن سعداء بوجودك معنا في متجر سليفي إن بلوم</p>
           </div>
 
           <div class="stats-grid">
@@ -888,7 +888,7 @@
             <div style="text-align: center; padding: 40px; color: rgba(139, 38, 35, 0.6);">
               <h3 style="margin-bottom: 16px;">لا توجد طلبات بعد</h3>
               <p>ابدئي تسوقك الآن واستمتعي بمنتجاتنا الجميلة!</p>
-              <a href="index.html" class="btn btn-primary" style="margin-top: 16px;">🛍️ ا��دئي التسوق</a>
+              <a href="index.html" class="btn btn-primary" style="margin-top: 16px;">🛍️ ابدئي التسوق</a>
             </div>
           `;
           return;
@@ -944,7 +944,7 @@
 
       function contactAboutOrder(orderNumber) {
         const message = encodeURIComponent(
-          `مرحباً! أريد الاستفسار عن طلبي رقم ${orderNumber} 🌸`,
+          `مرحباً! أريد الاستفسار عن طلبي ر��م ${orderNumber} 🌸`,
         );
         window.open(`https://wa.me/966501234567?text=${message}`, "_blank");
       }
@@ -991,6 +991,25 @@
           );
 
           showMessage("تم حفظ التغييرات بنجاح! 💾");
+        });
+
+      // Admin form handler
+      document
+        .getElementById("adminForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("adminEmail").value;
+          const password = document.getElementById("adminPassword").value;
+
+          // Simple admin authentication
+          if (
+            email === "slyvieinbloom@gmail.com" &&
+            password === "slyvie2024admin"
+          ) {
+            adminLogin(email, password);
+          } else {
+            showMessage("بيانات الإدارة غير صحيحة", "error");
+          }
         });
 
       // Auto-refresh orders
