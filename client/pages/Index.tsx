@@ -205,7 +205,7 @@ export default function Index() {
               size="lg"
               className="border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-brand-cream px-8 py-6"
             >
-              <Link to="/shop">View All Products</Link>
+              <Link to="/shop">{t("featured.viewAll")}</Link>
             </Button>
           </div>
         </div>
