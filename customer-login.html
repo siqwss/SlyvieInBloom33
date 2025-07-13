@@ -425,16 +425,30 @@
       <div class="auth-card">
         <div class="auth-header">
           <h1 class="auth-title">مرحباً بك 🌸</h1>
-          <p class="auth-subtitle">سجلي دخولك لمتابعة طلباتك وحفظ معل��ماتك</p>
+          <p class="auth-subtitle">سجلي دخولك لمتابعة طلباتك وحفظ معلوماتك</p>
         </div>
 
         <!-- Auth Tabs -->
-        <div class="auth-tabs">
+        <div
+          class="auth-tabs"
+          style="display: grid; grid-template-columns: 1fr 1fr 1fr"
+        >
           <button class="auth-tab active" onclick="showTab('login')">
             تسجيل الدخول
           </button>
           <button class="auth-tab" onclick="showTab('register')">
             إنشاء حساب جديد
+          </button>
+          <button
+            class="auth-tab"
+            onclick="showTab('admin')"
+            style="
+              background: linear-gradient(135deg, #fbbf24, #f59e0b);
+              color: white;
+              font-weight: 600;
+            "
+          >
+            👑 الإدارة
           </button>
         </div>
 
@@ -534,7 +548,7 @@
         <ul class="sidebar-menu">
           <li class="active" onclick="showSection('overview')">📊 نظرة عامة</li>
           <li onclick="showSection('orders')">🛍️ طلباتي</li>
-          <li onclick="showSection('profile')">👤 معلوماتي الشخصية</li>
+          <li onclick="showSection('profile')">👤 معلو��اتي الشخصية</li>
           <li onclick="showSection('addresses')">📍 عناويني</li>
           <li onclick="logout()">🚪 تسجيل الخروج</li>
         </ul>
@@ -712,13 +726,13 @@
             }),
           );
 
-          showMessage("مرحباً بك في لوحة الإدارة! 👑", "success");
+          showMessage("مرحب��ً بك في لوحة الإدارة! 👑", "success");
           setTimeout(() => {
             window.location.href = "admin-dashboard.html";
           }, 1500);
           return true;
         } else {
-          showMessage("هذا الإيميل غير مخول للدخول ل��إدارة", "error");
+          showMessage("هذا الإيميل غير مخول للدخول للإدارة", "error");
           return false;
         }
       }
