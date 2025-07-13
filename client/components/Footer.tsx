@@ -56,14 +56,14 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Home
+                  {t("nav.home")}
                 </Link>
               </li>
               <li>
@@ -71,7 +71,7 @@ export function Footer() {
                   to="/shop"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Shop
+                  {t("nav.shop")}
                 </Link>
               </li>
               <li>
@@ -79,7 +79,7 @@ export function Footer() {
                   to="/about"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  About Us
+                  {t("nav.about")}
                 </Link>
               </li>
               <li>
@@ -87,7 +87,7 @@ export function Footer() {
                   to="/contact"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Contact
+                  {t("nav.contact")}
                 </Link>
               </li>
             </ul>
@@ -95,14 +95,14 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="font-semibold mb-4">Categories</h3>
+            <h3 className="font-semibold mb-4">{t("footer.categories")}</h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Baby Items
+                  {t("category.babyItems")}
                 </a>
               </li>
               <li>
@@ -110,7 +110,7 @@ export function Footer() {
                   href="#"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Home Decor
+                  {t("category.homeDecor")}
                 </a>
               </li>
               <li>
@@ -118,7 +118,7 @@ export function Footer() {
                   href="#"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Accessories
+                  {t("category.accessories")}
                 </a>
               </li>
               <li>
@@ -126,7 +126,7 @@ export function Footer() {
                   href="#"
                   className="text-brand-cream/80 hover:text-brand-cream transition-colors"
                 >
-                  Toys
+                  {t("category.toys")}
                 </a>
               </li>
             </ul>
@@ -134,7 +134,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4">Contact Info</h3>
+            <h3 className="font-semibold mb-4">{t("footer.contact")}</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-brand-cream/80" />
