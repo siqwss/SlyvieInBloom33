@@ -1,14 +1,1636 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
+    <title>Slyvie in bloom - Handcrafted Crochet</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #8b2623;
+        --brand-cream: #fdfcf3;
+        --brand-dark: #6b1e1b;
+        --brand-light: #a5312e;
+        --brand-accent: rgba(139, 38, 35, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--brand-cream);
+        color: var(--brand-primary);
+        line-height: 1.6;
+      }
+
+      .font-serif {
+        font-family: "Playfair Display", serif;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      /* Header Styles */
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(253, 252, 243, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--brand-accent);
+        z-index: 50;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--brand-primary);
+      }
+
+      .logo img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+
+      .logo-text {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      .nav {
+        display: flex;
+        gap: 32px;
+      }
+
+      .nav a {
+        color: var(--brand-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav a:hover {
+        color: var(--brand-dark);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+      }
+
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .btn-primary:hover {
+        background: var(--brand-dark);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--brand-primary);
+        border: none;
+        padding: 8px;
+      }
+
+      .btn-ghost:hover {
+        background: var(--brand-accent);
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 80px 0;
+        background: linear-gradient(
+          135deg,
+          var(--brand-cream) 0%,
+          rgba(253, 252, 243, 0.8) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 40%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(139, 38, 35, 0.05) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-text {
+        max-width: 600px;
+      }
+
+      .hero-brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .hero-brand img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .hero-brand-text {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 24px;
+        line-height: 1.1;
+      }
+
+      .hero h1 span {
+        display: block;
+        font-weight: 700;
+      }
+
+      .hero p {
+        font-size: 18px;
+        margin-bottom: 32px;
+        opacity: 0.8;
+        max-width: 500px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .hero-buttons .btn {
+        padding: 16px 32px;
+        font-size: 16px;
+      }
+
+      .hero-image {
+        position: relative;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(139, 38, 35, 0.1);
+      }
+
+      .hero-image::before,
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: var(--brand-primary);
+        opacity: 0.2;
+      }
+
+      .hero-image::before {
+        width: 96px;
+        height: 96px;
+        bottom: -24px;
+        left: -24px;
+      }
+
+      .hero-image::after {
+        width: 64px;
+        height: 64px;
+        top: -24px;
+        right: -24px;
+        background: var(--brand-light);
+        opacity: 0.3;
+      }
+
+      /* Featured Section */
+      .featured {
+        padding: 80px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .section-header h2 {
+        font-size: 2.5rem;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 16px;
+      }
+
+      .section-header p {
+        font-size: 18px;
+        opacity: 0.7;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+        margin-bottom: 48px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.1);
+        transition: all 0.3s;
+        border: 1px solid var(--brand-accent);
+      }
+
+      .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(139, 38, 35, 0.15);
+      }
+
+      .product-image {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .wishlist-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .wishlist-btn:hover {
+        background: white;
+        transform: scale(1.1);
+      }
+
+      .product-content {
+        padding: 24px;
+      }
+
+      .product-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .product-description {
+        color: rgba(139, 38, 35, 0.7);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .product-price {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .stars {
+        display: flex;
+        gap: 2px;
+      }
+
+      .star {
+        color: var(--brand-primary);
+        font-size: 14px;
+      }
+
+      .rating-count {
+        font-size: 12px;
+        opacity: 0.7;
+        margin-left: 8px;
+      }
+
+      .add-to-cart {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 80px 0;
+        background: var(--brand-accent);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 48px;
+      }
+
+      .feature-item {
+        text-align: center;
+      }
+
+      .feature-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--brand-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+      }
+
+      .feature-icon svg {
+        width: 32px;
+        height: 32px;
+        stroke: var(--brand-cream);
+      }
+
+      .feature-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .feature-description {
+        opacity: 0.7;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        padding: 64px 0 24px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .footer-brand img {
+        width: 32px;
+        height: 32px;
+        filter: brightness(0) invert(1);
+      }
+
+      .footer-brand-text {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Playfair Display", serif;
+      }
+
+      .footer-description {
+        opacity: 0.8;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 16px;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-cream);
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 8px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .contact-info {
+        list-style: none;
+      }
+
+      .contact-info li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-bottom-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s;
+      }
+
+      .footer-bottom-links a:hover {
+        color: white;
+      }
+
+      /* Language Toggle */
+      .language-toggle {
+        position: relative;
+      }
+
+      .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid var(--brand-accent);
+        border-radius: 8px;
+        padding: 8px 0;
+        min-width: 120px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000;
+      }
+
+      .language-dropdown.show {
+        display: block;
+      }
+
+      .language-option {
+        display: block;
+        padding: 8px 16px;
+        color: var(--brand-primary);
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+
+      .language-option:hover,
+      .language-option.active {
+        background: var(--brand-accent);
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .nav {
+          display: none;
+        }
+
+        .hero-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-buttons {
+          justify-content: center;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 24px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          text-align: center;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* Cart Modal */
+      .cart-modal {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s;
+        z-index: 1000;
+        padding: 24px;
+        overflow-y: auto;
+      }
+
+      .cart-modal.open {
+        right: 0;
+      }
+
+      .cart-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+      }
+
+      .cart-overlay.show {
+        display: block;
+      }
+
+      .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--brand-accent);
+      }
+
+      .cart-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .close-cart {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--brand-primary);
+      }
+
+      .cart-empty {
+        text-align: center;
+        padding: 48px 24px;
+        color: rgba(139, 38, 35, 0.7);
+      }
+
+      .cart-count {
+        position: relative;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      /* Utility Classes */
+      .text-center {
+        text-align: center;
+      }
+      .relative {
+        position: relative;
+      }
+      .hidden {
+        display: none;
+      }
+      .flex {
+        display: flex;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .gap-4 {
+        gap: 16px;
+      }
+      .mt-4 {
+        margin-top: 16px;
+      }
+      .mb-4 {
+        margin-bottom: 16px;
+      }
+    </style>
   </head>
-
   <body>
-    <div id="root"></div>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <!-- Logo -->
+          <a href="#" class="logo">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+              alt="Slyvie in bloom logo"
+            />
+            <span class="logo-text">Slyvie in bloom</span>
+          </a>
 
-    <script type="module" src="/client/App.tsx"></script>
+          <!-- Navigation -->
+          <nav class="nav">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <!-- Header Actions -->
+          <div class="header-actions">
+            <!-- Language Toggle -->
+            <div class="language-toggle">
+              <button class="btn-ghost" onclick="toggleLanguage()">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
+              </button>
+              <div class="language-dropdown" id="languageDropdown">
+                <a
+                  href="#"
+                  class="language-option active"
+                  onclick="setLanguage('en')"
+                  >English</a
+                >
+                <a href="#" class="language-option" onclick="setLanguage('ar')"
+                  >العربية</a
+                >
+              </div>
+            </div>
+
+            <!-- Wishlist -->
+            <button class="btn-ghost">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                />
+              </svg>
+            </button>
+
+            <!-- Cart -->
+            <div class="cart-count relative">
+              <button class="btn-ghost" onclick="toggleCart()">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                  />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span class="cart-badge hidden" id="cartBadge">0</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text animate-fade-in">
+            <div class="hero-brand">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+                alt="Logo"
+              />
+              <span class="hero-brand-text">Slyvie in bloom</span>
+            </div>
+            <h1 class="font-serif">
+              Handcrafted with
+              <span>Love & Care</span>
+            </h1>
+            <p>
+              Discover our collection of beautiful, handmade crochet pieces.
+              Each item is crafted with premium materials and attention to
+              detail that brings warmth to your home.
+            </p>
+            <div class="hero-buttons">
+              <a href="#shop" class="btn btn-primary">Shop Now</a>
+              <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+          </div>
+          <div class="hero-image animate-fade-in">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=400&fit=crop"
+              alt="Beautiful crochet work"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="shop" class="featured">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="font-serif">Featured Collection</h2>
+          <p>
+            Handpicked pieces from our latest collection, each one unique and
+            made with love
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=240&fit=crop"
+                alt="Handmade Baby Blanket"
+              />
+              <div class="product-badge">Baby</div>
+              <button class="wishlist-btn">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">Handmade Baby Blanket</h3>
+              <p class="product-description">
+                Soft cotton baby blanket in pastel colors
+              </p>
+              <div class="product-footer">
+                <span class="product-price">150 SAR</span>
+                <div class="rating">
+                  <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                  </div>
+                  <span class="rating-count">(24)</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary add-to-cart"
+                onclick="addToCart('1', 'Handmade Baby Blanket', 150, 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=240&fit=crop')"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                  />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=240&fit=crop"
+                alt="Crochet Flower Bouquet"
+              />
+              <div class="product-badge">Decor</div>
+              <button class="wishlist-btn">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">Crochet Flower Bouquet</h3>
+              <p class="product-description">
+                Beautiful never-wilting flower arrangement
+              </p>
+              <div class="product-footer">
+                <span class="product-price">85 SAR</span>
+                <div class="rating">
+                  <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">���</span>
+                  </div>
+                  <span class="rating-count">(18)</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary add-to-cart"
+                onclick="addToCart('2', 'Crochet Flower Bouquet', 85, 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=240&fit=crop')"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                  />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=300&h=240&fit=crop"
+                alt="Cozy Winter Scarf"
+              />
+              <div class="product-badge">Accessories</div>
+              <button class="wishlist-btn">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">Cozy Winter Scarf</h3>
+              <p class="product-description">
+                Warm wool blend scarf in autumn colors
+              </p>
+              <div class="product-footer">
+                <span class="product-price">120 SAR</span>
+                <div class="rating">
+                  <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                  </div>
+                  <span class="rating-count">(31)</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary add-to-cart"
+                onclick="addToCart('3', 'Cozy Winter Scarf', 120, 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=300&h=240&fit=crop')"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                  />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=240&fit=crop"
+                alt="Amigurumi Bear"
+              />
+              <div class="product-badge">Toys</div>
+              <button class="wishlist-btn">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="product-content">
+              <h3 class="product-title">Amigurumi Bear</h3>
+              <p class="product-description">
+                Adorable stuffed bear toy for children
+              </p>
+              <div class="product-footer">
+                <span class="product-price">95 SAR</span>
+                <div class="rating">
+                  <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                  </div>
+                  <span class="rating-count">(42)</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary add-to-cart"
+                onclick="addToCart('4', 'Amigurumi Bear', 95, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=240&fit=crop')"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                  />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="#shop" class="btn btn-outline">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                />
+              </svg>
+            </div>
+            <h3 class="feature-title">Handmade with Love</h3>
+            <p class="feature-description">
+              Every piece is carefully crafted by hand with attention to detail
+              and premium materials.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <h3 class="feature-title">Fast Delivery</h3>
+            <p class="feature-description">
+              Quick and secure delivery across Saudi Arabia with tracking
+              included.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+            </div>
+            <h3 class="feature-title">Premium Quality</h3>
+            <p class="feature-description">
+              Using only the finest materials to ensure durability and beauty.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <!-- Brand -->
+          <div>
+            <div class="footer-brand">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+                alt="Logo"
+              />
+              <span class="footer-brand-text">Slyvie in bloom</span>
+            </div>
+            <p class="footer-description">
+              Handcrafted crochet pieces made with love and care. Each item is
+              unique and created to bring warmth to your home.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#shop">Shop</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Categories -->
+          <div class="footer-section">
+            <h3>Categories</h3>
+            <ul class="footer-links">
+              <li><a href="#">Baby Items</a></li>
+              <li><a href="#">Home Decor</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Toys</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <ul class="contact-info">
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                hello@slyviebloom.com
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
+                +966 50 123 4567
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Riyadh, Saudi Arabia
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 Slyvie in bloom. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Return Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-modal" id="cartModal">
+      <div class="cart-header">
+        <h3 class="cart-title">Shopping Cart</h3>
+        <button class="close-cart" onclick="toggleCart()">&times;</button>
+      </div>
+      <div id="cartContent">
+        <div class="cart-empty">
+          <p>Your cart is empty</p>
+          <p style="margin-top: 8px; font-size: 14px">
+            Start shopping to add items to your cart
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cart functionality
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let currentLanguage = "en";
+
+      function updateCartUI() {
+        const badge = document.getElementById("cartBadge");
+        const cartContent = document.getElementById("cartContent");
+
+        if (cart.length === 0) {
+          badge.classList.add("hidden");
+          cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <p>Your cart is empty</p>
+                        <p style="margin-top: 8px; font-size: 14px;">Start shopping to add items to your cart</p>
+                    </div>
+                `;
+        } else {
+          badge.classList.remove("hidden");
+          badge.textContent = cart.reduce(
+            (total, item) => total + item.quantity,
+            0,
+          );
+
+          const total = cart.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0,
+          );
+
+          cartContent.innerHTML = `
+                    <div style="margin-bottom: 24px;">
+                        ${cart
+                          .map(
+                            (item) => `
+                            <div style="display: flex; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--brand-accent);">
+                                <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                <div style="flex: 1;">
+                                    <h4 style="font-size: 14px; margin-bottom: 4px;">${item.name}</h4>
+                                    <p style="color: var(--brand-primary); font-weight: 600;">${item.price} SAR</p>
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                                        <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" style="width: 24px; height: 24px; border: 1px solid var(--brand-accent); background: white; border-radius: 4px; cursor: pointer;">-</button>
+                                        <span style="min-width: 20px; text-align: center;">${item.quantity}</span>
+                                        <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" style="width: 24px; height: 24px; border: 1px solid var(--brand-accent); background: white; border-radius: 4px; cursor: pointer;">+</button>
+                                        <button onclick="removeFromCart('${item.id}')" style="margin-left: auto; color: #ef4444; background: none; border: none; cursor: pointer;">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+                    <div style="border-top: 1px solid var(--brand-accent); padding-top: 16px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-weight: 600; font-size: 18px;">
+                            <span>Total:</span>
+                            <span>${total} SAR</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;">Proceed to Checkout</button>
+                        <button class="btn btn-outline" style="width: 100%;" onclick="toggleCart()">Continue Shopping</button>
+                    </div>
+                `;
+        }
+      }
+
+      function addToCart(id, name, price, image) {
+        const existingItem = cart.find((item) => item.id === id);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ id, name, price, image, quantity: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartUI();
+
+        // Show success message
+        showNotification("Item added to cart!");
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter((item) => item.id !== id);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartUI();
+      }
+
+      function updateQuantity(id, newQuantity) {
+        if (newQuantity <= 0) {
+          removeFromCart(id);
+          return;
+        }
+
+        const item = cart.find((item) => item.id === id);
+        if (item) {
+          item.quantity = newQuantity;
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartUI();
+        }
+      }
+
+      function toggleCart() {
+        const modal = document.getElementById("cartModal");
+        const overlay = document.getElementById("cartOverlay");
+
+        if (modal.classList.contains("open")) {
+          modal.classList.remove("open");
+          overlay.classList.remove("show");
+        } else {
+          modal.classList.add("open");
+          overlay.classList.add("show");
+        }
+      }
+
+      function showNotification(message) {
+        // Simple notification
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--brand-primary);
+                color: var(--brand-cream);
+                padding: 12px 20px;
+                border-radius: 8px;
+                z-index: 1001;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                transform: translateX(100%);
+                transition: transform 0.3s;
+            `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => (notification.style.transform = "translateX(0)"), 100);
+        setTimeout(() => {
+          notification.style.transform = "translateX(100%)";
+          setTimeout(() => document.body.removeChild(notification), 300);
+        }, 3000);
+      }
+
+      // Language functionality
+      function toggleLanguage() {
+        const dropdown = document.getElementById("languageDropdown");
+        dropdown.classList.toggle("show");
+      }
+
+      function setLanguage(lang) {
+        currentLanguage = lang;
+        const dropdown = document.getElementById("languageDropdown");
+        dropdown.classList.remove("show");
+
+        // Update active language
+        dropdown.querySelectorAll(".language-option").forEach((option) => {
+          option.classList.remove("active");
+        });
+        dropdown
+          .querySelector(`[onclick="setLanguage('${lang}')"]`)
+          .classList.add("active");
+
+        // Here you would implement actual language switching
+        // For now, just show a notification
+        showNotification(
+          lang === "en"
+            ? "Language set to English"
+            : "تم تعيين اللغة إلى العربية",
+        );
+      }
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".language-toggle")) {
+          document.getElementById("languageDropdown").classList.remove("show");
+        }
+      });
+
+      // Initialize cart UI
+      updateCartUI();
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all product cards and feature items
+      document
+        .querySelectorAll(".product-card, .feature-item")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+    </script>
   </body>
 </html>
