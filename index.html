@@ -1969,7 +1969,7 @@
         showNotification(
           lang === "en"
             ? "Language set to English"
-            : "تم تعيين اللغة إلى العربية",
+            : "تم تعيين ��للغة إلى العربية",
         );
       }
 
@@ -2005,6 +2005,29 @@
 
       // Initialize cart UI
       updateCartUI();
+
+      // Secret admin access - click logo 5 times
+      let logoClickCount = 0;
+      const logo = document.querySelector(".logo");
+      if (logo) {
+        logo.addEventListener("click", function (e) {
+          logoClickCount++;
+          if (logoClickCount === 5) {
+            e.preventDefault();
+            const password = prompt("كلمة المرور للإدارة:");
+            if (password === "slyvie2024") {
+              window.open("admin-orders.html", "_blank");
+            } else if (password !== null) {
+              alert("كلمة مرور خاطئة");
+            }
+            logoClickCount = 0;
+          }
+
+          setTimeout(() => {
+            logoClickCount = 0;
+          }, 3000);
+        });
+      }
 
       // Add animation on scroll
       const observerOptions = {
