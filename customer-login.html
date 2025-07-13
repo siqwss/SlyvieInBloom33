@@ -944,7 +944,7 @@
 
       function contactAboutOrder(orderNumber) {
         const message = encodeURIComponent(
-          `مرحباً! أريد الاستفسار عن طلبي ر��م ${orderNumber} 🌸`,
+          `مرحباً! أريد الاستفسار عن طلبي رقم ${orderNumber} 🌸`,
         );
         window.open(`https://wa.me/966501234567?text=${message}`, "_blank");
       }
@@ -1025,6 +1025,17 @@
           loadCustomerOrders();
         }
       }, 30000);
+
+      // Check URL hash for admin access
+      if (window.location.hash === "#admin") {
+        showTab("admin");
+        // Remove the hash
+        window.history.replaceState(
+          "",
+          document.title,
+          window.location.pathname,
+        );
+      }
     </script>
   </body>
 </html>
