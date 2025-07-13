@@ -13,38 +13,39 @@ import { Star, Heart, ShoppingBag } from "lucide-react";
 import { useCart, Product } from "../contexts/CartContext";
 import { useLanguage } from "../contexts/LanguageContext";
 
-const featuredProducts: Product[] = [
+// This will be replaced with dynamic data based on language
+const getProducts = (t: (key: string) => string): Product[] => [
   {
     id: "1",
-    name: "Handmade Baby Blanket",
+    name: t("product.babyBlanket"),
     price: 150,
     image: "/placeholder.svg",
-    description: "Soft cotton baby blanket in pastel colors",
-    category: "Baby",
+    description: t("product.babyBlanket.desc"),
+    category: t("category.baby"),
   },
   {
     id: "2",
-    name: "Crochet Flower Bouquet",
+    name: t("product.flowerBouquet"),
     price: 85,
     image: "/placeholder.svg",
-    description: "Beautiful never-wilting flower arrangement",
-    category: "Decor",
+    description: t("product.flowerBouquet.desc"),
+    category: t("category.decor"),
   },
   {
     id: "3",
-    name: "Cozy Winter Scarf",
+    name: t("product.winterScarf"),
     price: 120,
     image: "/placeholder.svg",
-    description: "Warm wool blend scarf in autumn colors",
-    category: "Accessories",
+    description: t("product.winterScarf.desc"),
+    category: t("category.accessories"),
   },
   {
     id: "4",
-    name: "Amigurumi Bear",
+    name: t("product.amigurumiBear"),
     price: 95,
     image: "/placeholder.svg",
-    description: "Adorable stuffed bear toy for children",
-    category: "Toys",
+    description: t("product.amigurumiBear.desc"),
+    category: t("category.toys"),
   },
 ];
 
