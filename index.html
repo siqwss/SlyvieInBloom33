@@ -1608,6 +1608,15 @@
         }
       });
 
+      // Proceed to checkout function
+      function proceedToCheckout() {
+        if (cart.length === 0) {
+          showNotification("Your cart is empty!");
+          return;
+        }
+        window.location.href = "order-form.html";
+      }
+
       // Initialize cart UI
       updateCartUI();
 
