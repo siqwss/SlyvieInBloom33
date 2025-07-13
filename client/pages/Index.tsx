@@ -11,6 +11,7 @@ import {
 import { Badge } from "../components/ui/badge";
 import { Star, Heart, ShoppingBag } from "lucide-react";
 import { useCart, Product } from "../contexts/CartContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const featuredProducts: Product[] = [
   {
