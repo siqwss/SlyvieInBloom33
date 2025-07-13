@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, Menu, X, Heart } from "lucide-react";
+import { ShoppingBag, Menu, X, Heart, Globe } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
+import { useLanguage } from "../contexts/LanguageContext";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -10,17 +11,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { Badge } from "./ui/badge";
 
 export function Header() {
   const { totalItems } = useCart();
+  const { language, setLanguage, t, isRTL } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Shop", href: "/shop" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.shop"), href: "/shop" },
+    { name: t("nav.about"), href: "/about" },
+    { name: t("nav.contact"), href: "/contact" },
   ];
 
   return (
@@ -28,20 +36,24 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
-              <div className="w-4 h-4 bg-brand-cream rounded-full relative">
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brand-primary rounded-full"></div>
-                <div className="absolute -top-1 -left-1 w-3 h-3 bg-brand-primary rounded-full"></div>
-              </div>
-            </div>
+          <Link
+            to="/"
+            className={`flex items-center ${isRTL ? "space-x-reverse space-x-2" : "space-x-2"}`}
+          >
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+              alt="Slyvie in bloom logo"
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-xl font-serif text-brand-primary font-semibold">
-              Slyvie in bloom
+              {t("header.brand")}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav
+            className={`hidden md:flex items-center ${isRTL ? "space-x-reverse space-x-8" : "space-x-8"}`}
+          >
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -54,14 +66,44 @@ export function Header() {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-4">
+          <div
+            className={`flex items-center ${isRTL ? "space-x-reverse space-x-4" : "space-x-4"}`}
+          >
+            {/* Language Switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-brand-primary hover:text-brand-dark"
+                >
+                  <Globe className="h-5 w-5" />
+                  <span className="sr-only">Language</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-brand-cream border-brand-primary/20">
+                <DropdownMenuItem
+                  onClick={() => setLanguage("en")}
+                  className={language === "en" ? "bg-brand-primary/10" : ""}
+                >
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setLanguage("ar")}
+                  className={language === "ar" ? "bg-brand-primary/10" : ""}
+                >
+                  العربية
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <Button
               variant="ghost"
               size="icon"
               className="hidden sm:flex text-brand-primary hover:text-brand-dark"
             >
               <Heart className="h-5 w-5" />
-              <span className="sr-only">Wishlist</span>
+              <span className="sr-only">{t("nav.wishlist")}</span>
             </Button>
 
             <Sheet>
@@ -77,28 +119,28 @@ export function Header() {
                       {totalItems}
                     </Badge>
                   )}
-                  <span className="sr-only">Shopping cart</span>
+                  <span className="sr-only">{t("nav.cart")}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent className="bg-brand-cream">
                 <SheetHeader>
                   <SheetTitle className="text-brand-primary">
-                    Shopping Cart
+                    {t("cart.title")}
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-6">
                   {totalItems === 0 ? (
-                    <p className="text-muted-foreground">Your cart is empty</p>
+                    <p className="text-muted-foreground">{t("cart.empty")}</p>
                   ) : (
                     <div className="space-y-4">
                       <p className="text-brand-primary">
-                        {totalItems} items in cart
+                        {totalItems} {t("cart.items")}
                       </p>
                       <Button
                         asChild
                         className="w-full bg-brand-primary hover:bg-brand-dark text-brand-cream"
                       >
-                        <Link to="/cart">View Cart</Link>
+                        <Link to="/cart">{t("cart.viewCart")}</Link>
                       </Button>
                     </div>
                   )}
