@@ -425,7 +425,7 @@
       <div class="auth-card">
         <div class="auth-header">
           <h1 class="auth-title">مرحباً بك 🌸</h1>
-          <p class="auth-subtitle">سجلي دخولك لمتابعة طلباتك وحفظ معلوماتك</p>
+          <p class="auth-subtitle">سجلي دخولك لمتابعة طلباتك وحفظ معل��ماتك</p>
         </div>
 
         <!-- Auth Tabs -->
@@ -553,7 +553,7 @@
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-number" id="totalOrders">0</div>
-              <div class="stat-label">إجمالي الطل��ات</div>
+              <div class="stat-label">إجمالي الطلبات</div>
             </div>
             <div class="stat-card">
               <div class="stat-number" id="totalSpent">0</div>
@@ -697,6 +697,30 @@
         showMessage("مرحباً بك مرة أخرى! 🌸");
         setTimeout(showDashboard, 1500);
         return true;
+      }
+
+      // Admin login function
+      function adminLogin(email, password) {
+        if (email === "slyvieinbloom@gmail.com") {
+          // Store admin session
+          localStorage.setItem(
+            "adminSession",
+            JSON.stringify({
+              email: email,
+              loginTime: new Date().toISOString(),
+              isAdmin: true,
+            }),
+          );
+
+          showMessage("مرحباً بك في لوحة الإدارة! 👑", "success");
+          setTimeout(() => {
+            window.location.href = "admin-dashboard.html";
+          }, 1500);
+          return true;
+        } else {
+          showMessage("هذا الإيميل غير مخول للدخول ل��إدارة", "error");
+          return false;
+        }
       }
 
       function quickLogin() {
