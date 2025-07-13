@@ -168,7 +168,7 @@ export default function Index() {
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-brand-primary">
-                      {product.price} SAR
+                      {product.price} {t("product.sar")}
                     </span>
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
