@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إدارة الطلبات - Slyvie in bloom</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #8b2623;
+        --brand-cream: #fdfcf3;
+        --brand-dark: #6b1e1b;
+        --brand-light: #a5312e;
+        --brand-accent: rgba(139, 38, 35, 0.1);
+        --success-color: #22c55e;
+        --warning-color: #f59e0b;
+        --info-color: #3b82f6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans Arabic", "Inter", sans-serif;
+        background-color: var(--brand-cream);
+        color: var(--brand-primary);
+        line-height: 1.6;
+        direction: rtl;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .header {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        padding: 24px 0;
+        margin-bottom: 32px;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+        font-family: "Playfair Display", serif;
+        text-align: center;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(139, 38, 35, 0.1);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--brand-primary);
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        color: rgba(139, 38, 35, 0.7);
+        font-size: 14px;
+      }
+
+      .orders-section {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.1);
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--brand-accent);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--brand-primary);
+      }
+
+      .filter-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1px solid var(--brand-primary);
+        background: transparent;
+        color: var(--brand-primary);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 14px;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .orders-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      .order-card {
+        border: 1px solid var(--brand-accent);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s;
+      }
+
+      .order-card:hover {
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.15);
+      }
+
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .order-number {
+        font-weight: 700;
+        color: var(--brand-primary);
+        font-size: 18px;
+      }
+
+      .order-status {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .status-confirmed {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      .status-preparing {
+        background: #fde68a;
+        color: #92400e;
+      }
+
+      .status-shipped {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .status-completed {
+        background: #f3e8ff;
+        color: #7c3aed;
+      }
+
+      .customer-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 16px;
+        padding: 16px;
+        background: var(--brand-cream);
+        border-radius: 8px;
+      }
+
+      .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .info-label {
+        font-size: 12px;
+        color: rgba(139, 38, 35, 0.6);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .info-value {
+        color: var(--brand-primary);
+        font-weight: 500;
+      }
+
+      .order-items {
+        margin-bottom: 16px;
+      }
+
+      .items-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--brand-dark);
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--brand-accent);
+      }
+
+      .item:last-child {
+        border-bottom: none;
+      }
+
+      .order-total {
+        text-align: left;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--brand-primary);
+        padding: 16px;
+        background: var(--brand-accent);
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+
+      .order-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.3s;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .btn-primary:hover {
+        background: var(--brand-dark);
+      }
+
+      .btn-success {
+        background: var(--success-color);
+        color: white;
+      }
+
+      .btn-success:hover {
+        background: #16a34a;
+      }
+
+      .btn-warning {
+        background: var(--warning-color);
+        color: white;
+      }
+
+      .btn-warning:hover {
+        background: #d97706;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 48px;
+        color: rgba(139, 38, 35, 0.6);
+      }
+
+      .empty-state h3 {
+        margin-bottom: 8px;
+        color: var(--brand-primary);
+      }
+
+      .export-section {
+        margin-bottom: 24px;
+        text-align: left;
+      }
+
+      .export-btn {
+        background: var(--info-color);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+
+      .export-btn:hover {
+        background: #2563eb;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 16px;
+        }
+
+        .customer-info {
+          grid-template-columns: 1fr;
+        }
+
+        .order-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .order-actions {
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+          flex-wrap: wrap;
+        }
+      }
+
+      .recommendations {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border: 1px solid var(--warning-color);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 32px;
+      }
+
+      .recommendations h3 {
+        color: #92400e;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .recommendations ul {
+        color: #92400e;
+        padding-right: 20px;
+      }
+
+      .recommendations li {
+        margin-bottom: 8px;
+      }
+
+      .recommendations a {
+        color: #92400e;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1>🛍️ إدارة طلبات متجر سليفي إن بلوم 🌸</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Recommendations -->
+      <div class="recommendations">
+        <h3>💡 توصيات لإدارة أفضل للطلبات</h3>
+        <ul>
+          <li>
+            <strong>Notion:</strong> إنشاء قاعدة بيانات احترافية للطلبات
+            <a href="https://notion.so" target="_blank">جربي Notion مجاناً</a>
+          </li>
+          <li>
+            <strong>Google Sheets:</strong> إنشاء جدول بيانات لتتبع الطلبات
+            <a href="https://sheets.google.com" target="_blank"
+              >افتحي Google Sheets</a
+            >
+          </li>
+          <li>
+            <strong>Airtable:</strong> قاعدة بيانات سهلة الاستخدام
+            <a href="https://airtable.com" target="_blank">جربي Airtable</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalOrders">0</div>
+          <div class="stat-label">إجمالي الطلبات</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="pendingOrders">0</div>
+          <div class="stat-label">طلبات معلقة</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalRevenue">0</div>
+          <div class="stat-label">إجمالي المبيعات (ريال)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="completedOrders">0</div>
+          <div class="stat-label">طلبات مكتملة</div>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div class="orders-section">
+        <div class="section-header">
+          <h2 class="section-title">قائمة الطلبات</h2>
+          <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterOrders('all')">
+              جميع الطلبات
+            </button>
+            <button class="filter-btn" onclick="filterOrders('pending')">
+              معلقة
+            </button>
+            <button class="filter-btn" onclick="filterOrders('confirmed')">
+              مؤكدة
+            </button>
+            <button class="filter-btn" onclick="filterOrders('shipped')">
+              مشحونة
+            </button>
+            <button class="filter-btn" onclick="filterOrders('completed')">
+              مكتملة
+            </button>
+          </div>
+        </div>
+
+        <div class="export-section">
+          <button class="export-btn" onclick="exportToCSV()">
+            📊 تصدير البيانات (CSV)
+          </button>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+          <!-- Orders will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      let currentFilter = "all";
+
+      function updateStats() {
+        const totalOrders = orders.length;
+        const pendingOrders = orders.filter(
+          (o) => o.status === "pending",
+        ).length;
+        const completedOrders = orders.filter(
+          (o) => o.status === "completed",
+        ).length;
+        const totalRevenue = orders
+          .filter((o) => o.status === "completed")
+          .reduce((sum, order) => sum + order.total, 0);
+
+        document.getElementById("totalOrders").textContent = totalOrders;
+        document.getElementById("pendingOrders").textContent = pendingOrders;
+        document.getElementById("completedOrders").textContent =
+          completedOrders;
+        document.getElementById("totalRevenue").textContent =
+          totalRevenue.toLocaleString();
+      }
+
+      function getStatusText(status) {
+        const statusMap = {
+          pending: "قيد الانتظار",
+          confirmed: "��ؤكد",
+          preparing: "قيد التحضير",
+          shipped: "مشحون",
+          completed: "مكتمل",
+        };
+        return statusMap[status] || status;
+      }
+
+      function updateOrderStatus(orderNumber, newStatus) {
+        orders = orders.map((order) => {
+          if (order.orderNumber === orderNumber) {
+            order.status = newStatus;
+          }
+          return order;
+        });
+        localStorage.setItem("orders", JSON.stringify(orders));
+        displayOrders();
+        updateStats();
+      }
+
+      function contactCustomer(phone, orderNumber) {
+        const message = encodeURIComponent(
+          `مرحباً! بخصوص طلبك رقم ${orderNumber} في متجر سليفي إن بلوم 🌸`,
+        );
+        window.open(
+          `https://wa.me/966${phone.slice(1)}?text=${message}`,
+          "_blank",
+        );
+      }
+
+      function displayOrders() {
+        const ordersList = document.getElementById("ordersList");
+
+        let filteredOrders = orders;
+        if (currentFilter !== "all") {
+          filteredOrders = orders.filter(
+            (order) => order.status === currentFilter,
+          );
+        }
+
+        if (filteredOrders.length === 0) {
+          ordersList.innerHTML = `
+            <div class="empty-state">
+              <h3>لا توجد طلبات</h3>
+              <p>لم يتم استلام أي طلبات بعد</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Sort by date (newest first)
+        filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        ordersList.innerHTML = filteredOrders
+          .map(
+            (order) => `
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-number">#${order.orderNumber}</span>
+              <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
+            </div>
+            
+            <div class="customer-info">
+              <div class="info-item">
+                <span class="info-label">اسم العميل</span>
+                <span class="info-value">${order.customer.firstName} ${order.customer.lastName}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">رقم الجوال</span>
+                <span class="info-value">${order.customer.phone}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">المدينة</span>
+                <span class="info-value">${order.customer.city}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">التاريخ</span>
+                <span class="info-value">${order.date}</span>
+              </div>
+            </div>
+
+            <div class="info-item" style="margin-bottom: 16px;">
+              <span class="info-label">العنوان الكامل</span>
+              <span class="info-value">${order.customer.district}, ${order.customer.address}, ${order.customer.city}</span>
+            </div>
+            
+            <div class="order-items">
+              <div class="items-title">المنتجات:</div>
+              ${order.items
+                .map(
+                  (item) => `
+                <div class="item">
+                  <span>${item.name} × ${item.quantity}</span>
+                  <span>${item.price * item.quantity} ريال</span>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+            
+            <div class="order-total">
+              المجموع الكلي: ${order.total} ريال
+            </div>
+            
+            ${
+              order.customer.notes
+                ? `
+            <div class="info-item" style="margin-bottom: 16px;">
+              <span class="info-label">ملاحظات العميل</span>
+              <span class="info-value">${order.customer.notes}</span>
+            </div>
+            `
+                : ""
+            }
+            
+            <div class="order-actions">
+              <button class="btn btn-primary" onclick="contactCustomer('${order.customer.phone}', '${order.orderNumber}')">
+                📱 تواصل مع العميل
+              </button>
+              
+              ${
+                order.status === "pending"
+                  ? `
+              <button class="btn btn-success" onclick="updateOrderStatus('${order.orderNumber}', 'confirmed')">
+                ✅ تأكيد الطلب
+              </button>
+              `
+                  : ""
+              }
+              
+              ${
+                order.status === "confirmed"
+                  ? `
+              <button class="btn btn-warning" onclick="updateOrderStatus('${order.orderNumber}', 'preparing')">
+                🔨 قيد التحضير
+              </button>
+              `
+                  : ""
+              }
+              
+              ${
+                order.status === "preparing"
+                  ? `
+              <button class="btn btn-warning" onclick="updateOrderStatus('${order.orderNumber}', 'shipped')">
+                🚚 تم الشحن
+              </button>
+              `
+                  : ""
+              }
+              
+              ${
+                order.status === "shipped"
+                  ? `
+              <button class="btn btn-success" onclick="updateOrderStatus('${order.orderNumber}', 'completed')">
+                ✅ مكتمل
+              </button>
+              `
+                  : ""
+              }
+            </div>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      function filterOrders(status) {
+        currentFilter = status;
+
+        // Update active button
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        displayOrders();
+      }
+
+      function exportToCSV() {
+        if (orders.length === 0) {
+          alert("لا توجد طلبات للتصدير");
+          return;
+        }
+
+        const headers = [
+          "رقم الطلب",
+          "التاريخ",
+          "اسم العميل",
+          "رقم الجوال",
+          "البريد الإلكتروني",
+          "المدي��ة",
+          "الحي",
+          "العنوان",
+          "المنتجات",
+          "المجموع",
+          "الحالة",
+          "ملاحظات",
+        ];
+
+        const csvData = orders.map((order) => [
+          order.orderNumber,
+          order.date,
+          `${order.customer.firstName} ${order.customer.lastName}`,
+          order.customer.phone,
+          order.customer.email || "",
+          order.customer.city,
+          order.customer.district,
+          order.customer.address,
+          order.items
+            .map((item) => `${item.name} (${item.quantity})`)
+            .join("; "),
+          order.total,
+          getStatusText(order.status),
+          order.customer.notes || "",
+        ]);
+
+        const csv = [headers, ...csvData]
+          .map((row) => row.map((field) => `"${field}"`).join(","))
+          .join("\n");
+
+        const blob = new Blob(["\ufeff" + csv], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `طلبات-سليفي-إن-بلوم-${new Date().toISOString().slice(0, 10)}.csv`;
+        link.click();
+      }
+
+      // Initialize
+      updateStats();
+      displayOrders();
+
+      // Auto-refresh every 30 seconds
+      setInterval(() => {
+        orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        updateStats();
+        displayOrders();
+      }, 30000);
+    </script>
+  </body>
+</html>
