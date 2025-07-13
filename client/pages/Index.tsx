@@ -61,36 +61,41 @@ export default function Index() {
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-10"></div>
         <div className="relative container mx-auto px-4 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start mb-6">
-                <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-4">
-                  <div className="w-6 h-6 bg-brand-cream rounded-full relative">
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-brand-primary rounded-full"></div>
-                    <div className="absolute -top-1 -left-1 w-4 h-4 bg-brand-primary rounded-full"></div>
-                  </div>
-                </div>
+            <div
+              className={`text-center ${isRTL ? "lg:text-right" : "lg:text-left"}`}
+            >
+              <div
+                className={`flex items-center justify-center ${isRTL ? "lg:justify-end" : "lg:justify-start"} mb-6`}
+              >
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+                  alt="Slyvie in bloom logo"
+                  className={`w-12 h-12 object-contain ${isRTL ? "ml-4" : "mr-4"}`}
+                />
                 <span className="text-2xl font-serif text-brand-primary font-semibold">
-                  Slyvie in bloom
+                  {t("header.brand")}
                 </span>
               </div>
               <h1 className="text-4xl md:text-6xl font-serif text-brand-primary mb-6 leading-tight">
-                Handcrafted with
+                {t("hero.title")}
                 <span className="block text-brand-primary font-bold">
-                  Love & Care
+                  {t("hero.subtitle")}
                 </span>
               </h1>
-              <p className="text-lg text-brand-primary/80 mb-8 max-w-xl mx-auto lg:mx-0">
-                Discover our collection of beautiful, handmade crochet pieces.
-                Each item is crafted with premium materials and attention to
-                detail that brings warmth to your home.
+              <p
+                className={`text-lg text-brand-primary/80 mb-8 max-w-xl mx-auto ${isRTL ? "lg:mr-0" : "lg:mx-0"}`}
+              >
+                {t("hero.description")}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div
+                className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? "lg:justify-end" : "lg:justify-start"}`}
+              >
                 <Button
                   asChild
                   size="lg"
                   className="bg-brand-primary hover:bg-brand-dark text-brand-cream px-8 py-6 text-lg"
                 >
-                  <Link to="/shop">Shop Now</Link>
+                  <Link to="/shop">{t("hero.shop")}</Link>
                 </Button>
                 <Button
                   variant="outline"
@@ -98,7 +103,7 @@ export default function Index() {
                   className="border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-brand-cream px-8 py-6 text-lg"
                   asChild
                 >
-                  <Link to="/about">Learn More</Link>
+                  <Link to="/about">{t("hero.learn")}</Link>
                 </Button>
               </div>
             </div>
