@@ -94,8 +94,11 @@ export function Header() {
                       <p className="text-brand-primary">
                         {totalItems} items in cart
                       </p>
-                      <Button className="w-full bg-brand-primary hover:bg-brand-dark text-brand-cream">
-                        View Cart
+                      <Button
+                        asChild
+                        className="w-full bg-brand-primary hover:bg-brand-dark text-brand-cream"
+                      >
+                        <Link to="/cart">View Cart</Link>
                       </Button>
                     </div>
                   )}
