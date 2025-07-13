@@ -133,7 +133,7 @@ const translations = {
     "cart.emptyDesc": "ابدئي التسوق لإضافة منتجات للسلة",
     "cart.continue": "متابعة التسوق",
     "cart.viewCart": "عرض السلة",
-    "cart.items": "منتجات في السلة",
+    "cart.itemsInCart": "منتجات في السلة",
     "cart.orderSummary": "ملخص الطلب",
     "cart.items": "المنتجات",
     "cart.shipping": "الشحن",
