@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة إدارة المتجر - Slyvie in bloom</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #8b2623;
+        --brand-cream: #fdfcf3;
+        --brand-dark: #6b1e1b;
+        --brand-light: #a5312e;
+        --brand-accent: rgba(139, 38, 35, 0.1);
+        --success-color: #22c55e;
+        --warning-color: #f59e0b;
+        --info-color: #3b82f6;
+        --danger-color: #ef4444;
+        --admin-primary: #7c3aed;
+        --admin-accent: #a855f7;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans Arabic", "Inter", sans-serif;
+        background: linear-gradient(135deg, var(--brand-cream), #f8fafc);
+        color: var(--brand-primary);
+        line-height: 1.6;
+        direction: rtl;
+      }
+
+      .admin-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: 100vh;
+      }
+
+      .admin-sidebar {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+        padding: 24px;
+        box-shadow: 4px 0 12px rgba(139, 38, 35, 0.1);
+      }
+
+      .admin-header {
+        text-align: center;
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 24px;
+      }
+
+      .admin-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .admin-logo img {
+        width: 40px;
+        height: 40px;
+        filter: brightness(0) invert(1);
+      }
+
+      .admin-title {
+        font-size: 1.5rem;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 8px;
+      }
+
+      .admin-subtitle {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .admin-nav {
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+
+      .admin-nav-item {
+        padding: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+      }
+
+      .admin-nav-item:hover,
+      .admin-nav-item.active {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(-4px);
+      }
+
+      .admin-nav-icon {
+        font-size: 18px;
+        width: 24px;
+        text-align: center;
+      }
+
+      .admin-main {
+        padding: 32px;
+        overflow-y: auto;
+      }
+
+      .admin-topbar {
+        background: white;
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-bottom: 32px;
+        box-shadow: 0 2px 12px rgba(139, 38, 35, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .topbar-welcome {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .welcome-avatar {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--admin-primary),
+          var(--admin-accent)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .welcome-text h2 {
+        font-size: 20px;
+        margin-bottom: 4px;
+        color: var(--brand-primary);
+      }
+
+      .welcome-text p {
+        color: rgba(139, 38, 35, 0.6);
+        font-size: 14px;
+      }
+
+      .topbar-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .btn-primary:hover {
+        background: var(--brand-dark);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--brand-primary);
+        color: var(--brand-cream);
+      }
+
+      .btn-danger {
+        background: var(--danger-color);
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #dc2626;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.08);
+        transition: all 0.3s;
+        border: 1px solid rgba(139, 38, 35, 0.1);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(139, 38, 35, 0.12);
+      }
+
+      .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: white;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--brand-primary);
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        color: rgba(139, 38, 35, 0.6);
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .stat-trend {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 8px;
+      }
+
+      .trend-up {
+        color: var(--success-color);
+      }
+
+      .trend-down {
+        color: var(--danger-color);
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.08);
+        margin-bottom: 32px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--brand-accent);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--brand-primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .quick-action {
+        background: white;
+        border: 2px solid var(--brand-accent);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        color: var(--brand-primary);
+      }
+
+      .quick-action:hover {
+        border-color: var(--brand-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 38, 35, 0.1);
+      }
+
+      .quick-action-icon {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .quick-action-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .quick-action-desc {
+        font-size: 12px;
+        opacity: 0.7;
+      }
+
+      .recent-orders {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        border: 1px solid var(--brand-accent);
+        border-radius: 12px;
+        margin-bottom: 12px;
+        transition: all 0.3s;
+      }
+
+      .order-item:hover {
+        box-shadow: 0 2px 8px rgba(139, 38, 35, 0.1);
+      }
+
+      .order-info h4 {
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: var(--brand-primary);
+      }
+
+      .order-info p {
+        font-size: 12px;
+        color: rgba(139, 38, 35, 0.6);
+      }
+
+      .order-status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .status-confirmed {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      .status-completed {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .customers-preview {
+        display: grid;
+        gap: 12px;
+      }
+
+      .customer-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border: 1px solid var(--brand-accent);
+        border-radius: 12px;
+      }
+
+      .customer-avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--brand-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+      }
+
+      .customer-info h4 {
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: var(--brand-primary);
+      }
+
+      .customer-info p {
+        font-size: 12px;
+        color: rgba(139, 38, 35, 0.6);
+      }
+
+      .customer-stats {
+        margin-right: auto;
+        text-align: left;
+      }
+
+      .logout-btn {
+        margin-top: auto;
+        padding: 16px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid var(--danger-color);
+        border-radius: 12px;
+        color: var(--danger-color);
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+      }
+
+      .logout-btn:hover {
+        background: var(--danger-color);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .admin-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-sidebar {
+          position: fixed;
+          top: 0;
+          right: -280px;
+          height: 100vh;
+          z-index: 1000;
+          transition: right 0.3s;
+        }
+
+        .admin-sidebar.open {
+          right: 0;
+        }
+
+        .admin-main {
+          padding: 16px;
+        }
+
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-welcome {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .topbar-actions {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 48px;
+        color: rgba(139, 38, 35, 0.6);
+      }
+
+      .error-state {
+        text-align: center;
+        padding: 48px;
+        color: var(--danger-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="admin-header">
+          <div class="admin-logo">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F13e11346f6ee4de6b150f7304f4e7aca%2Fd6d5745669d541e0b6da8b0f22033c5a?format=webp&width=800"
+              alt="Logo"
+            />
+            <div>
+              <div class="admin-title">Slyvie in bloom</div>
+              <div class="admin-subtitle">لوحة الإدارة</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="admin-nav">
+          <li class="admin-nav-item active" onclick="showSection('dashboard')">
+            <span class="admin-nav-icon">📊</span>
+            <span>لوحة المعلومات</span>
+          </li>
+          <li class="admin-nav-item" onclick="showSection('orders')">
+            <span class="admin-nav-icon">🛍️</span>
+            <span>إدارة الطلبات</span>
+          </li>
+          <li class="admin-nav-item" onclick="showSection('customers')">
+            <span class="admin-nav-icon">👥</span>
+            <span>إدارة العملاء</span>
+          </li>
+          <li class="admin-nav-item" onclick="showSection('analytics')">
+            <span class="admin-nav-icon">📈</span>
+            <span>التقارير والإحصائيات</span>
+          </li>
+          <li class="admin-nav-item" onclick="showSection('settings')">
+            <span class="admin-nav-icon">⚙️</span>
+            <span>إعدادات المتجر</span>
+          </li>
+        </ul>
+
+        <div class="logout-btn" onclick="logout()">
+          <span>🚪</span>
+          <span>تسجيل الخروج</span>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="admin-main">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+          <div class="topbar-welcome">
+            <div class="welcome-avatar">👑</div>
+            <div class="welcome-text">
+              <h2>مرحباً سليفي!</h2>
+              <p id="currentDateTime">📅 الأحد، 15 ديسمبر 2024 - 10:30 ص</p>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <a href="index.html" class="btn btn-outline" target="_blank">
+              🏪 زيارة المتجر
+            </a>
+            <button class="btn btn-primary" onclick="refreshData()">
+              🔄 تحديث البيانات
+            </button>
+          </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection">
+          <!-- Stats Cards -->
+          <div class="dashboard-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <div class="stat-icon" style="background: var(--success-color)">
+                  🛍️
+                </div>
+              </div>
+              <div class="stat-number" id="totalOrders">0</div>
+              <div class="stat-label">إجمالي الطلبات</div>
+              <div class="stat-trend trend-up">
+                <span>↗️</span> +12% من الشهر الماضي
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div class="stat-icon" style="background: var(--info-color)">
+                  💰
+                </div>
+              </div>
+              <div class="stat-number" id="totalRevenue">0</div>
+              <div class="stat-label">إجمالي المبيعات (ريال)</div>
+              <div class="stat-trend trend-up">
+                <span>↗️</span> +8% من الشهر الماضي
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div class="stat-icon" style="background: var(--warning-color)">
+                  ⏳
+                </div>
+              </div>
+              <div class="stat-number" id="pendingOrders">0</div>
+              <div class="stat-label">طلبات معلقة</div>
+              <div class="stat-trend trend-down"><span>↘️</span> -3 من أمس</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div class="stat-icon" style="background: var(--admin-primary)">
+                  👥
+                </div>
+              </div>
+              <div class="stat-number" id="totalCustomers">0</div>
+              <div class="stat-label">إجمالي العملاء</div>
+              <div class="stat-trend trend-up">
+                <span>↗️</span> +5 عملاء جدد هذا الأسبوع
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">⚡ إجراءات سريعة</h2>
+            </div>
+            <div class="quick-actions">
+              <a href="admin-orders.html" class="quick-action" target="_blank">
+                <div class="quick-action-icon">📋</div>
+                <div class="quick-action-title">إدارة الطلبات المفصلة</div>
+                <div class="quick-action-desc">عرض وإدارة جميع الطلبات</div>
+              </a>
+              <div class="quick-action" onclick="exportAllData()">
+                <div class="quick-action-icon">📊</div>
+                <div class="quick-action-title">تصدير البيانات</div>
+                <div class="quick-action-desc">
+                  تصدير جميع البيانات لملف Excel
+                </div>
+              </div>
+              <div class="quick-action" onclick="sendBulkMessage()">
+                <div class="quick-action-icon">📱</div>
+                <div class="quick-action-title">رسالة جماعية</div>
+                <div class="quick-action-desc">إرسال رسالة لجميع العملاء</div>
+              </div>
+              <div class="quick-action" onclick="showSection('settings')">
+                <div class="quick-action-icon">⚙️</div>
+                <div class="quick-action-title">إعدادات المتجر</div>
+                <div class="quick-action-desc">تحديث معلومات المتجر</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">🆕 أحدث الطلبات</h2>
+              <a
+                href="admin-orders.html"
+                class="btn btn-outline"
+                target="_blank"
+                >عرض الكل</a
+              >
+            </div>
+            <div class="recent-orders" id="recentOrdersList">
+              <!-- Recent orders will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Top Customers -->
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">⭐ أفضل العملاء</h2>
+              <button
+                class="btn btn-outline"
+                onclick="showSection('customers')"
+              >
+                عرض الكل
+              </button>
+            </div>
+            <div class="customers-preview" id="topCustomersList">
+              <!-- Top customers will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Other sections will be added here -->
+        <div id="ordersSection" class="hidden">
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">🛍️ إدارة الطلبات</h2>
+              <a
+                href="admin-orders.html"
+                class="btn btn-primary"
+                target="_blank"
+              >
+                📋 صفحة الطلبات المفصلة
+              </a>
+            </div>
+            <p
+              style="
+                text-align: center;
+                padding: 40px;
+                color: rgba(139, 38, 35, 0.6);
+              "
+            >
+              يتم إعادة توجيهك إلى صفحة إدارة الطلبات المفصلة...
+            </p>
+          </div>
+        </div>
+
+        <div id="customersSection" class="hidden">
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">👥 إدارة العملاء</h2>
+            </div>
+            <div id="allCustomersList">
+              <!-- All customers will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <div id="analyticsSection" class="hidden">
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">📈 التقارير والإحصائيات</h2>
+            </div>
+            <p
+              style="
+                text-align: center;
+                padding: 40px;
+                color: rgba(139, 38, 35, 0.6);
+              "
+            >
+              قريباً... ستتضمن تقارير مفصلة عن المبيعات والعملاء
+            </p>
+          </div>
+        </div>
+
+        <div id="settingsSection" class="hidden">
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">⚙️ إعدادات المتجر</h2>
+            </div>
+            <div style="display: grid; gap: 24px">
+              <div
+                style="
+                  padding: 20px;
+                  border: 1px solid var(--brand-accent);
+                  border-radius: 12px;
+                "
+              >
+                <h3 style="margin-bottom: 16px; color: var(--brand-primary)">
+                  معلومات المتجر
+                </h3>
+                <p><strong>اسم المتجر:</strong> Slyvie in bloom</p>
+                <p><strong>الإيميل:</strong> slyvieinbloom@gmail.com</p>
+                <p><strong>الجوال:</strong> +966 50 123 4567</p>
+              </div>
+              <div
+                style="
+                  padding: 20px;
+                  border: 1px solid var(--brand-accent);
+                  border-radius: 12px;
+                "
+              >
+                <h3 style="margin-bottom: 16px; color: var(--brand-primary)">
+                  إعدادات النظام
+                </h3>
+                <p><strong>نسخة النظام:</strong> 1.0.0</p>
+                <p><strong>آخر تحديث:</strong> 15 ديسمبر 2024</p>
+                <button
+                  class="btn btn-outline"
+                  onclick="clearAllData()"
+                  style="margin-top: 16px"
+                >
+                  🗑️ مسح جميع البيانات
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Check admin authentication
+      const adminSession = JSON.parse(
+        localStorage.getItem("adminSession") || "null",
+      );
+      if (!adminSession || !adminSession.isAdmin) {
+        window.location.href = "customer-login.html";
+      }
+
+      // Load data
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      let customers = JSON.parse(localStorage.getItem("customers") || "{}");
+
+      function showSection(section) {
+        // Update navigation
+        document.querySelectorAll(".admin-nav-item").forEach((item) => {
+          item.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        // Hide all sections
+        document.querySelectorAll('[id$="Section"]').forEach((sec) => {
+          sec.classList.add("hidden");
+        });
+
+        // Show selected section
+        document.getElementById(section + "Section").classList.remove("hidden");
+
+        // Special handling for orders section
+        if (section === "orders") {
+          setTimeout(() => {
+            window.open("admin-orders.html", "_blank");
+          }, 500);
+        }
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        document.getElementById("currentDateTime").textContent =
+          "📅 " + now.toLocaleDateString("ar-SA", options);
+      }
+
+      function loadDashboardStats() {
+        const totalOrders = orders.length;
+        const totalRevenue = orders.reduce(
+          (sum, order) => sum + (order.total || 0),
+          0,
+        );
+        const pendingOrders = orders.filter(
+          (order) => order.status === "pending" || order.status === "confirmed",
+        ).length;
+        const totalCustomers = Object.keys(customers).length;
+
+        document.getElementById("totalOrders").textContent = totalOrders;
+        document.getElementById("totalRevenue").textContent =
+          totalRevenue.toLocaleString();
+        document.getElementById("pendingOrders").textContent = pendingOrders;
+        document.getElementById("totalCustomers").textContent = totalCustomers;
+      }
+
+      function loadRecentOrders() {
+        const recentOrders = orders.slice(-5).reverse();
+        const container = document.getElementById("recentOrdersList");
+
+        if (recentOrders.length === 0) {
+          container.innerHTML = `
+            <div class="loading">
+              <p>لا توجد طلبات حتى الآن</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = recentOrders
+          .map(
+            (order) => `
+          <div class="order-item">
+            <div class="order-info">
+              <h4>#${order.orderNumber}</h4>
+              <p>${order.customer.firstName} ${order.customer.lastName} - ${order.date}</p>
+            </div>
+            <div class="order-status status-${order.status}">
+              ${getStatusText(order.status)}
+            </div>
+            <div style="text-align: left; color: var(--brand-primary); font-weight: 600;">
+              ${order.total} ريال
+            </div>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      function loadTopCustomers() {
+        const customerStats = Object.values(customers)
+          .map((customer) => {
+            const customerOrders = orders.filter(
+              (order) => order.customer.phone === customer.phone,
+            );
+            const totalSpent = customerOrders.reduce(
+              (sum, order) => sum + (order.total || 0),
+              0,
+            );
+            return {
+              ...customer,
+              orderCount: customerOrders.length,
+              totalSpent: totalSpent,
+            };
+          })
+          .sort((a, b) => b.totalSpent - a.totalSpent)
+          .slice(0, 5);
+
+        const container = document.getElementById("topCustomersList");
+
+        if (customerStats.length === 0) {
+          container.innerHTML = `
+            <div class="loading">
+              <p>لا يوجد عملاء مسجلين حتى الآن</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = customerStats
+          .map(
+            (customer) => `
+          <div class="customer-item">
+            <div class="customer-avatar">
+              ${customer.name.charAt(0)}
+            </div>
+            <div class="customer-info">
+              <h4>${customer.name}</h4>
+              <p>${customer.phone}</p>
+            </div>
+            <div class="customer-stats">
+              <p style="font-size: 12px; color: rgba(139, 38, 35, 0.6);">
+                ${customer.orderCount} طلبات - ${customer.totalSpent} ريال
+              </p>
+            </div>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      function getStatusText(status) {
+        const statusMap = {
+          pending: "قيد المراجعة",
+          confirmed: "مؤكد",
+          preparing: "قيد التحضير",
+          shipped: "مشحون",
+          completed: "مكتمل",
+        };
+        return statusMap[status] || status;
+      }
+
+      function refreshData() {
+        orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        customers = JSON.parse(localStorage.getItem("customers") || "{}");
+        loadDashboardStats();
+        loadRecentOrders();
+        loadTopCustomers();
+
+        // Show success message
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = "✅ تم التحديث";
+        btn.style.background = "var(--success-color)";
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = "var(--brand-primary)";
+        }, 2000);
+      }
+
+      function exportAllData() {
+        if (orders.length === 0) {
+          alert("لا توجد بيانات للتصدير");
+          return;
+        }
+
+        const data = {
+          orders: orders,
+          customers: customers,
+          exportDate: new Date().toISOString(),
+          summary: {
+            totalOrders: orders.length,
+            totalRevenue: orders.reduce(
+              (sum, order) => sum + (order.total || 0),
+              0,
+            ),
+            totalCustomers: Object.keys(customers).length,
+          },
+        };
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
+          type: "application/json",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `slyvie-bloom-data-${new Date().toISOString().slice(0, 10)}.json`;
+        link.click();
+      }
+
+      function sendBulkMessage() {
+        const customerPhones = Object.keys(customers);
+        if (customerPhones.length === 0) {
+          alert("لا يوجد عملاء لإرسال رسائل لهم");
+          return;
+        }
+
+        const message = prompt(
+          "أدخل نص الرسالة التي تريدين إرسالها لجميع العملاء:",
+        );
+        if (message) {
+          const encodedMessage = encodeURIComponent(
+            `🌸 رسالة من متجر سليفي إن بلوم 🌸\n\n${message}\n\nشكراً لثقتك بنا! 💕`,
+          );
+          customerPhones.forEach((phone) => {
+            window.open(
+              `https://wa.me/966${phone.slice(1)}?text=${encodedMessage}`,
+              "_blank",
+            );
+          });
+        }
+      }
+
+      function clearAllData() {
+        if (
+          confirm(
+            "هل أنت متأكدة من مسح جميع البيانات؟ هذا الإجراء لا يمكن التراجع عنه.",
+          )
+        ) {
+          if (confirm("تأكيد أخير: سيتم مسح جميع الطلبات والعملاء!")) {
+            localStorage.removeItem("orders");
+            localStorage.removeItem("customers");
+            orders = [];
+            customers = {};
+            refreshData();
+            alert("تم مسح جميع البيانات بنجاح");
+          }
+        }
+      }
+
+      function logout() {
+        if (confirm("هل تريدين تسجيل الخروج من لوحة الإدارة؟")) {
+          localStorage.removeItem("adminSession");
+          window.location.href = "customer-login.html";
+        }
+      }
+
+      // Initialize dashboard
+      updateDateTime();
+      setInterval(updateDateTime, 60000); // Update every minute
+      loadDashboardStats();
+      loadRecentOrders();
+      loadTopCustomers();
+
+      // Auto-refresh data every 30 seconds
+      setInterval(refreshData, 30000);
+    </script>
+  </body>
+</html>
