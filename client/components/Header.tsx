@@ -134,7 +134,7 @@ export function Header() {
                   ) : (
                     <div className="space-y-4">
                       <p className="text-brand-primary">
-                        {totalItems} {t("cart.items")}
+                        {totalItems} {t("cart.itemsInCart")}
                       </p>
                       <Button
                         asChild
