@@ -582,7 +582,7 @@
                   name="notes"
                   class="form-input"
                   rows="3"
-                  placeholder="أي ملاحظات أ�� طلبات خاصة..."
+                  placeholder="أي ملاحظات أو طلبات خاصة..."
                 ></textarea>
               </div>
             </div>
@@ -750,7 +750,7 @@
           orderMessage += `• الجوال: ${orderData.phone}\n`;
           orderMessage += `• البريد: ${orderData.email || "غير محدد"}\n`;
           orderMessage += `• المدينة: ${orderData.city}\n`;
-          orderMessage += `• الحي: ${orderData.district}\n`;
+          orderMessage += `• الح��: ${orderData.district}\n`;
           orderMessage += `• العنوان: ${orderData.address}\n\n`;
 
           orderMessage += `🛍️ *تفاصيل الطلب:*\n`;
@@ -819,6 +819,38 @@
         }
         e.target.value = value;
       });
+
+      // Check if customer is logged in and prefill form
+      const currentCustomer = JSON.parse(
+        localStorage.getItem("currentCustomer") || "null",
+      );
+      if (currentCustomer) {
+        // Prefill form with customer data
+        document.getElementById("firstName").value =
+          currentCustomer.name.split(" ")[0] || "";
+        document.getElementById("lastName").value =
+          currentCustomer.name.split(" ").slice(1).join(" ") || "";
+        document.getElementById("phone").value = currentCustomer.phone || "";
+        document.getElementById("email").value = currentCustomer.email || "";
+
+        // Show welcome message
+        const welcomeMsg = document.createElement("div");
+        welcomeMsg.style.cssText =
+          "background: #dcfce7; color: #166534; padding: 16px; border-radius: 8px; margin-bottom: 24px; text-align: center; border: 1px solid #22c55e;";
+        welcomeMsg.innerHTML = `🌸 مرحباً ${currentCustomer.name}! تم تعبئة بياناتك تلقائياً`;
+        document
+          .querySelector(".form-container")
+          .insertBefore(welcomeMsg, document.querySelector(".order-summary"));
+      } else {
+        // Show login suggestion
+        const loginMsg = document.createElement("div");
+        loginMsg.style.cssText =
+          "background: #fef3c7; color: #92400e; padding: 16px; border-radius: 8px; margin-bottom: 24px; text-align: center; border: 1px solid #f59e0b;";
+        loginMsg.innerHTML = `💡 <a href="customer-login.html" style="color: #92400e; font-weight: 600; text-decoration: underline;">سجلي دخولك</a> لحفظ بياناتك وتتبع طلباتك بسهولة`;
+        document
+          .querySelector(".form-container")
+          .insertBefore(loginMsg, document.querySelector(".order-summary"));
+      }
 
       // Load order summary on page load
       loadOrderSummary();
