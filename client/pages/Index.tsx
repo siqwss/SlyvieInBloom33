@@ -51,6 +51,8 @@ const getProducts = (t: (key: string) => string): Product[] => [
 
 export default function Index() {
   const { addItem } = useCart();
+  const { t, isRTL } = useLanguage();
+  const featuredProducts = getProducts(t);
 
   return (
     <div className="min-h-screen bg-brand-cream">
