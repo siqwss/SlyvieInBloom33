@@ -480,6 +480,57 @@
           <button type="submit" class="btn btn-primary">🔑 تسجيل الدخول</button>
         </form>
 
+        <!-- Admin Login Form -->
+        <form id="adminForm" class="auth-form hidden">
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 24px;
+              padding: 16px;
+              background: linear-gradient(135deg, #fef3c7, #fde68a);
+              border-radius: 12px;
+              border: 1px solid #f59e0b;
+            "
+          >
+            <h3 style="color: #92400e; margin-bottom: 8px; font-size: 18px">
+              👑 دخول الإدارة
+            </h3>
+            <p style="color: #92400e; font-size: 14px; margin: 0">
+              للوصول للوحة إدارة المتجر
+            </p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="adminEmail">إيميل المتجر</label>
+            <input
+              type="email"
+              id="adminEmail"
+              class="form-input"
+              placeholder="slyvieinbloom@gmail.com"
+              value="slyvieinbloom@gmail.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="adminPassword"
+              >كلمة مرور الإدارة</label
+            >
+            <input
+              type="password"
+              id="adminPassword"
+              class="form-input"
+              placeholder="أدخل كلمة مرور الإدارة"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="background: linear-gradient(135deg, #f59e0b, #d97706)"
+          >
+            👑 دخول لوحة الإدارة
+          </button>
+        </form>
+
         <!-- Register Form -->
         <form id="registerForm" class="auth-form hidden">
           <div class="form-group">
@@ -548,7 +599,7 @@
         <ul class="sidebar-menu">
           <li class="active" onclick="showSection('overview')">📊 نظرة عامة</li>
           <li onclick="showSection('orders')">🛍️ طلباتي</li>
-          <li onclick="showSection('profile')">👤 معلو��اتي الشخصية</li>
+          <li onclick="showSection('profile')">👤 معلوماتي الشخصية</li>
           <li onclick="showSection('addresses')">📍 عناويني</li>
           <li onclick="logout()">🚪 تسجيل الخروج</li>
         </ul>
@@ -726,7 +777,7 @@
             }),
           );
 
-          showMessage("مرحب��ً بك في لوحة الإدارة! 👑", "success");
+          showMessage("مرحباً بك في لوحة الإدارة! 👑", "success");
           setTimeout(() => {
             window.location.href = "admin-dashboard.html";
           }, 1500);
@@ -866,7 +917,7 @@
           pending: "قيد المراجعة",
           confirmed: "مؤكد",
           preparing: "قيد التحضير",
-          shipped: "في الطريق إليك",
+          shipped: "في الطريق إ��يك",
           completed: "مكتمل",
         };
         return statusMap[status] || status;
