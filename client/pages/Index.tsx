@@ -188,8 +188,10 @@ export default function Index() {
                     onClick={() => addItem(product)}
                     className="w-full bg-brand-primary hover:bg-brand-dark text-brand-cream"
                   >
-                    <ShoppingBag className="h-4 w-4 mr-2" />
-                    Add to Cart
+                    <ShoppingBag
+                      className={`h-4 w-4 ${isRTL ? "ml-2" : "mr-2"}`}
+                    />
+                    {t("featured.addToCart")}
                   </Button>
                 </CardFooter>
               </Card>
